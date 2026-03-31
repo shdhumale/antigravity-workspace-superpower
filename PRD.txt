@@ -1,0 +1,70 @@
+## Product Requirements Document (PRD): Simple Ticket Management System
+
+**Version:** 1.0  
+**Status:** Draft  
+**Date:** March 31, 2026
+
+---
+
+### 1. Executive Summary
+The goal is to build a lightweight, browser-based Ticket Management System using HTML and JavaScript. This tool is designed for simplicity, allowing users to view, create, and search for tickets without the overhead of a database or authentication system.
+
+---
+
+### 2. Target Audience
+* Small teams needing a quick internal tracking tool.
+* Users looking for a "no-fuss" organizational interface.
+
+---
+
+### 3. Functional Requirements
+
+#### 3.1 Dashboard (Landing Page)
+* **Purpose:** Provide an overview of all existing tickets.
+* **Display:** A table format containing the following columns:
+    * **ID:** Unique identifier for the ticket.
+    * **Name:** Short title of the issue.
+    * **Description:** Detailed explanation.
+    * **Status:** Current state (New, Assigned, Done, or Escalate).
+
+#### 3.2 Create New Ticket
+* **Purpose:** Allow users to add new entries to the system.
+* **Input Fields:**
+    * Ticket ID (Auto-generated or manual entry).
+    * Name of Ticket (Text input).
+    * Description (Text area).
+    * Status (Dropdown selection: New, Assigned, Done, Escalate).
+* **Action:** A "Save" button to commit the data.
+
+#### 3.3 Search Functionality
+* **Purpose:** Filter and locate specific tickets based on user input.
+* **Input:** A single search bar accepting a string.
+* **Logic:** Matches the string against Ticket Name or Description.
+* **Output:** Displays filtered results in a table identical to the Dashboard format.
+
+---
+
+### 4. Data Architecture
+* **Storage:** For this phase, data will be handled via a `.txt` file or local JSON-like structure.
+* **Note on Implementation:** Since standard client-side JavaScript cannot directly "write" to a local text file on a server due to security restrictions, the initial version will simulate this using `localStorage` or provide a "Download Updated Text File" option to maintain the simple HTML/JS architecture.
+
+---
+
+### 5. User Interface (UI) Design
+* **Theme:** Minimalist and clean.
+* **Navigation:** Simple tabs or a navigation bar to toggle between **Dashboard**, **Create**, and **Search**.
+* **Styling:** Basic CSS for table borders, padding, and button clarity.
+
+---
+
+### 6. Technical Stack
+* **Frontend:** HTML5, CSS3.
+* **Logic:** Vanilla JavaScript (ES6+).
+* **Backend:** None (Client-side only).
+
+---
+
+### 7. Constraints & Out of Scope
+* **No Authentication:** No login or user roles required.
+* **No Database:** Data persistence is limited to text-based local simulation.
+* **Single User:** Designed for local/single-browser use unless hosted with a backend.

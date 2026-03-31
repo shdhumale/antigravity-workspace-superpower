@@ -1,0 +1,13 @@
+﻿Scenario,Sequence of Extensions
+New Feature Development,using-superpowers → brainstorming → writing-plans → executing-plans → test-driven-development → requesting-code-review → receiving-code-review → verification-before-completion → finishing-a-development-branch → using-git-worktrees → writing-skills
+Change Request (CR),using-superpowers → writing-plans → executing-plans → single-flow-task-execution → requesting-code-review → receiving-code-review → verification-before-completion → finishing-a-development-branch
+Bugs & Defects,using-superpowers → systematic-debugging → single-flow-task-execution → test-driven-development → requesting-code-review → verification-before-completion → finishing-a-development-branch
+Security Enhancement,using-superpowers → brainstorming → writing-plans → executing-plans → test-driven-development → requesting-code-review → verification-before-completion → finishing-a-development-branch
+Security Issues (Hotfixes),using-superpowers → systematic-debugging → single-flow-task-execution → verification-before-completion → finishing-a-development-branch
+Performance Enhancement,using-superpowers → brainstorming → writing-plans → executing-plans → test-driven-development → requesting-code-review → verification-before-completion → finishing-a-development-branch
+Performance Issues,using-superpowers → systematic-debugging → single-flow-task-execution → verification-before-completion → finishing-a-development-branch
+UI/UX,using-superpowers → brainstorming → writing-plans → executing-plans → requesting-code-review → receiving-code-review → verification-before-completion → finishing-a-development-branch → writing-skills
+Refactoring,using-superpowers → writing-plans → executing-plans → systematic-debugging → requesting-code-review → verification-before-completion → finishing-a-development-branch
+Middleware/API Updates,using-superpowers → writing-plans → executing-plans → test-driven-development → requesting-code-review → receiving-code-review → verification-before-completion → finishing-a-development-branch → using-git-worktrees
+Technical Debt / Refactoring,using-superpowers → writing-plans → executing-plans → systematic-debugging → requesting-code-review → verification-before-completion → finishing-a-development-branch
+DevOps & Infrastructure,using-superpowers → brainstorming → writing-plans → executing-plans → single-flow-task-execution → verification-before-completion → finishing-a-development-branch

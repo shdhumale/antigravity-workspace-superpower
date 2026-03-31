@@ -1,0 +1,61 @@
+<div class="actions" style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+    <div>
+        <button (click)="toggleCreate()"
+            style="padding: 8px 16px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            {{ isCreating ? 'Cancel' : 'Create New Ticket' }}
+        </button>
+    </div>
+    <div>
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Search by name or desc..."
+            style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 250px;">
+        <button (click)="search()"
+            style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 5px;">Search</button>
+    </div>
+</div>
+
+<div *ngIf="isCreating"
+    style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 4px; background-color: #fcfcfc;">
+    <h3>Create Ticket</h3>
+    <div style="margin-bottom: 10px;">
+        <input type="text" [(ngModel)]="newTicket.name" placeholder="Ticket Name"
+            style="width: 100%; padding: 8px; box-sizing: border-box;">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <textarea [(ngModel)]="newTicket.description" placeholder="Description" rows="3"
+            style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <select [(ngModel)]="newTicket.status" style="padding: 8px; width: 100%; box-sizing: border-box;">
+            <option value="NEW">New</option>
+            <option value="ASSIGNED">Assigned</option>
+            <option value="DONE">Done</option>
+            <option value="ESCALATE">Escalate</option>
+        </select>
+    </div>
+    <button (click)="createTicket()"
+        style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Save
+        Ticket</button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of tickets">
+            <td>{{ t.id }}</td>
+            <td>{{ t.name }}</td>
+            <td>{{ t.description }}</td>
+            <td><span style="padding: 4px 8px; border-radius: 12px; font-size: 12px; background-color: #eee;">{{
+                    t.status }}</span></td>
+        </tr>
+        <tr *ngIf="tickets.length === 0">
+            <td colspan="4" style="text-align: center; color: #777;">No tickets found.</td>
+        </tr>
+    </tbody>
+</table>
