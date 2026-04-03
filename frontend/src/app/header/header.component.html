@@ -1,0 +1,95 @@
+<header [class.bg-white]="scrolled && !themeService.isDark()" [class.dark:bg-slate-950]="scrolled"
+    [class.border-b]="scrolled" [class.shadow-sm]="scrolled"
+    class="sticky top-0 z-50 w-full border-transparent transition-all duration-300" [ngClass]="{
+    'bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800 shadow-sm': scrolled,
+    'bg-transparent': !scrolled
+  }">
+    <nav class="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4">
+
+        <!-- Logo / Wordmark -->
+        <a href="#"
+            class="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <!-- Ticket icon SVG -->
+            <svg class="h-6 w-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+            </svg>
+            <span class="font-bold text-slate-900 dark:text-white text-sm tracking-tight">TicketMgmt</span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden items-center gap-1 md:flex">
+            <a *ngFor="let link of links" [href]="link.href"
+                class="rounded-md px-3 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-colors">
+                {{ link.label }}
+            </a>
+        </div>
+
+        <!-- Right side: Theme Toggle + CTA -->
+        <div class="flex items-center gap-2">
+
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle-btn" (click)="toggleTheme()"
+                class="flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                [attr.aria-label]="themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+                title="Toggle dark mode">
+                <!-- Sun icon (show in dark mode) -->
+                <svg *ngIf="themeService.isDark()" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+                <!-- Moon icon (show in light mode) -->
+                <svg *ngIf="!themeService.isDark()" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+
+            <!-- Get Started (Desktop only) -->
+            <a href="#"
+                class="hidden md:inline-flex items-center justify-center rounded-md bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white transition-colors shadow-sm">
+                Get Started
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" (click)="toggleMenu()"
+                class="flex md:hidden h-9 w-9 items-center justify-center rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                [attr.aria-expanded]="open" aria-controls="mobile-menu" aria-label="Toggle menu">
+                <!-- Hamburger / X icon -->
+                <svg *ngIf="!open" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg *ngIf="open" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div *ngIf="open" id="mobile-menu"
+        class="fixed top-14 right-0 bottom-0 left-0 z-40 flex flex-col bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 md:hidden">
+        <div class="flex flex-col gap-1 p-4">
+            <a *ngFor="let link of links" [href]="link.href"
+                class="rounded-md px-3 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                (click)="toggleMenu()">
+                {{ link.label }}
+            </a>
+        </div>
+        <div class="mt-auto flex flex-col gap-2 p-4 border-t border-slate-200 dark:border-slate-800">
+            <a href="#"
+                class="flex items-center justify-center rounded-md border border-slate-200 dark:border-slate-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                Sign In
+            </a>
+            <a href="#"
+                class="flex items-center justify-center rounded-md bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors">
+                Get Started
+            </a>
+        </div>
+    </div>
+</header>

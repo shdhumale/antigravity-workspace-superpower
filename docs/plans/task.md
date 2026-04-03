@@ -1,10 +1,9 @@
-# Project: Performance Enhancement Tasks
+# Task Tracker: Dark Mode & Component Integration
 
-| ID | Task | Status | Completion |
-|---|---|---|---|
-| 1 | Enable Backend Caching | [x] | 2026-04-03 |
-| 2 | Implement Pagination in Backend Controller | [x] | 2026-04-03 |
-| 3 | Implement Result Caching | [x] | 2026-04-03 |
-| 4 | Update Frontend Ticket Service | [ ] | |
-| 5 | Implement Search Debouncing | [ ] | |
-| 6 | Implement Pagination UI | [ ] | |
+| Task | Status | Description |
+| :--- | :--- | :--- |
+| Task 1 | ✅ Done | Setup Tailwind CSS (files written, needs `npm install`) |
+| Task 2 | ✅ Done | Implement ThemeService |
+| Task 3 | ✅ Done | Create Header Component |
+| Task 4 | ✅ Done | Create Footer Component |
+| Task 5 | ✅ Done | Integrate into AppComponent |
