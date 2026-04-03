@@ -9,6 +9,14 @@ export interface Ticket {
   status: string;
 }
 
+export interface PaginatedResponse<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,16 +25,16 @@ export class TicketService {
 
   constructor(private http: HttpClient) {}
 
-  getAllTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.apiUrl);
+  getAllTickets(page: number = 0, size: number = 10): Observable<PaginatedResponse<Ticket>> {
+    return this.http.get<PaginatedResponse<Ticket>>(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 
   createTicket(ticket: Ticket): Observable<Ticket> {
     return this.http.post<Ticket>(this.apiUrl, ticket);
   }
 
-  searchTickets(query: string): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(`${this.apiUrl}/search?query=${query}`);
+  searchTickets(query: string, page: number = 0, size: number = 10): Observable<PaginatedResponse<Ticket>> {
+    return this.http.get<PaginatedResponse<Ticket>>(`${this.apiUrl}/search?query=${query}&page=${page}&size=${size}`);
   }
 
   updateTicket(id: number, ticket: Ticket): Observable<Ticket> {

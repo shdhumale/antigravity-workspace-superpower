@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TicketService, Ticket } from '../ticket.service';
+import { TicketService, Ticket, PaginatedResponse } from '../ticket.service';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,35 +10,75 @@ import { TicketService, Ticket } from '../ticket.service';
   imports: [CommonModule, FormsModule],
   templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   tickets: Ticket[] = [];
   searchQuery: string = '';
   
+  // Pagination
+  currentPage: number = 0;
+  totalPages: number = 0;
+  pageSize: number = 10;
+
   newTicket: Ticket = { name: '', description: '', status: 'NEW' };
   isCreating: boolean = false;
+
+  private searchTerms = new Subject<string>();
+  private destroy$ = new Subject<void>();
 
   constructor(private ticketService: TicketService) {}
 
   ngOnInit() {
     this.loadTickets();
+
+    this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      takeUntil(this.destroy$)
+    ).subscribe(term => {
+      this.searchQuery = term;
+      this.search();
+    });
   }
 
-  loadTickets() {
-    this.ticketService.getAllTickets().subscribe({
-      next: (data) => this.tickets = data,
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  loadTickets(page: number = this.currentPage) {
+    this.ticketService.getAllTickets(page, this.pageSize).subscribe({
+      next: (data: PaginatedResponse<Ticket>) => {
+        this.tickets = data.content;
+        this.totalPages = data.totalPages;
+        this.currentPage = data.number;
+      },
       error: (err) => console.error('Error fetching tickets', err)
     });
   }
 
+  onSearchChange(term: string) {
+    this.searchTerms.next(term);
+  }
+
   search() {
     if(!this.searchQuery.trim()) {
-      this.loadTickets();
+      this.loadTickets(0);
       return;
     }
-    this.ticketService.searchTickets(this.searchQuery).subscribe({
-      next: (data) => this.tickets = data,
+    this.ticketService.searchTickets(this.searchQuery, 0, this.pageSize).subscribe({
+      next: (data: PaginatedResponse<Ticket>) => {
+        this.tickets = data.content;
+        this.totalPages = data.totalPages;
+        this.currentPage = data.number;
+      },
       error: (err) => console.error('Error searching tickets', err)
     });
+  }
+
+  goToPage(page: number) {
+    if (page >= 0 && page < this.totalPages) {
+      this.loadTickets(page);
+    }
   }
 
   toggleCreate() {
@@ -47,7 +88,7 @@ export class DashboardComponent implements OnInit {
   createTicket() {
     this.ticketService.createTicket(this.newTicket).subscribe({
       next: (ticket) => {
-        this.tickets.push(ticket);
+        this.loadTickets(this.currentPage); // Reload current page
         this.isCreating = false;
         this.newTicket = { name: '', description: '', status: 'NEW' };
       },
@@ -70,10 +111,7 @@ export class DashboardComponent implements OnInit {
     if(this.editingTicket && this.editingTicket.id) {
       this.ticketService.updateTicket(this.editingTicket.id, this.editingTicket).subscribe({
         next: (updated) => {
-          const index = this.tickets.findIndex(t => t.id === updated.id);
-          if (index !== -1) {
-            this.tickets[index] = updated;
-          }
+          this.loadTickets(this.currentPage);
           this.editingTicket = null;
         },
         error: (err) => console.error('Error updating ticket', err)

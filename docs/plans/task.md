@@ -1,10 +1,10 @@
-# Task List
+# Project: Performance Enhancement Tasks
 
-| Task | Description | Status |
-|---|---|---|
-| 1 | Reproduce decryption failure in backend with a test | done |
-| 2 | Fix `DescriptionEncryptionConverter` to handle unencrypted data robustly | done |
-| 3 | Configure `SecurityConfig` to permit all and allow CORS | done |
-| 4 | Verify backend `getAllTickets` returns 200 OK | done (Code fixed, restart required) |
-| 5 | Verify frontend dashboard displays records | done (Code fixed, restart required) |
-| 6 | final cleanup and verification | done |
+| ID | Task | Status | Completion |
+|---|---|---|---|
+| 1 | Enable Backend Caching | [x] | 2026-04-03 |
+| 2 | Implement Pagination in Backend Controller | [x] | 2026-04-03 |
+| 3 | Implement Result Caching | [x] | 2026-04-03 |
+| 4 | Update Frontend Ticket Service | [ ] | |
+| 5 | Implement Search Debouncing | [ ] | |
+| 6 | Implement Pagination UI | [ ] | |
