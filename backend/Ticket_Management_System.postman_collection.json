@@ -1,0 +1,95 @@
+{
+    "info": {
+        "_postman_id": "c8eac8f2-8d76-4d2d-8de5-df56bd4eeb9c",
+        "name": "Ticket Management System",
+        "description": "Postman collection for the Ticket Management System Spring Boot backend REST APIs.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get All Tickets",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/tickets",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "tickets"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Create Ticket",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"System Issue\",\n    \"description\": \"System is running slow\",\n    \"status\": \"NEW\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/tickets",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "tickets"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Search Tickets",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/tickets/search?query=System",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "tickets",
+                        "search"
+                    ],
+                    "query": [
+                        {
+                            "key": "query",
+                            "value": "System"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
