@@ -37,6 +37,34 @@
         Ticket</button>
 </div>
 
+<div *ngIf="editingTicket"
+    style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 4px; background-color: #fff3cd;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Edit Ticket</h3>
+        <button (click)="cancelEdit()"
+            style="padding: 4px 8px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <input type="text" [(ngModel)]="editingTicket.name" placeholder="Ticket Name"
+            style="width: 100%; padding: 8px; box-sizing: border-box;">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <textarea [(ngModel)]="editingTicket.description" placeholder="Description" rows="3"
+            style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <select [(ngModel)]="editingTicket.status" style="padding: 8px; width: 100%; box-sizing: border-box;">
+            <option value="NEW">New</option>
+            <option value="ASSIGNED">Assigned</option>
+            <option value="DONE">Done</option>
+            <option value="ESCALATE">Escalate</option>
+        </select>
+    </div>
+    <button (click)="saveEdit()"
+        style="padding: 8px 16px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Update
+        Ticket</button>
+</div>
+
 <table>
     <thead>
         <tr>
@@ -44,6 +72,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Status</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -53,9 +82,13 @@
             <td>{{ t.description }}</td>
             <td><span style="padding: 4px 8px; border-radius: 12px; font-size: 12px; background-color: #eee;">{{
                     t.status }}</span></td>
+            <td>
+                <button (click)="editTicket(t)"
+                    style="padding: 4px 8px; background-color: #ffc107; color: #000; border: none; border-radius: 4px; cursor: pointer;">Edit</button>
+            </td>
         </tr>
         <tr *ngIf="tickets.length === 0">
-            <td colspan="4" style="text-align: center; color: #777;">No tickets found.</td>
+            <td colspan="5" style="text-align: center; color: #777;">No tickets found.</td>
         </tr>
     </tbody>
 </table>

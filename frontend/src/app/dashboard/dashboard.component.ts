@@ -54,4 +54,30 @@ export class DashboardComponent implements OnInit {
       error: (err) => console.error('Error creating ticket', err)
     });
   }
+
+  editingTicket: Ticket | null = null;
+
+  editTicket(ticket: Ticket) {
+    this.editingTicket = { ...ticket }; 
+    this.isCreating = false;
+  }
+
+  cancelEdit() {
+    this.editingTicket = null;
+  }
+
+  saveEdit() {
+    if(this.editingTicket && this.editingTicket.id) {
+      this.ticketService.updateTicket(this.editingTicket.id, this.editingTicket).subscribe({
+        next: (updated) => {
+          const index = this.tickets.findIndex(t => t.id === updated.id);
+          if (index !== -1) {
+            this.tickets[index] = updated;
+          }
+          this.editingTicket = null;
+        },
+        error: (err) => console.error('Error updating ticket', err)
+      });
+    }
+  }
 }

@@ -1,7 +1,5 @@
-| Task | Status |
-|---|---|
-| 1. Initialize Spring Boot Backend | Done |
-| 2. Backend - TicketEntity & Repository (TDD) | Done |
-| 3. Backend - TicketController (TDD) | Done |
-| 4. Initialize Angular Frontend | Done |
-| 5. Frontend - Services and Dashboard Component | Done |
+| Status | Task |
+|--------|------|
+| [x] | Task 1: Fix Backend Ticket Update Logic (Uncomment entity mapping) |
+| [x] | Task 2: Fix Frontend Dashboard Edit Logic (Uncomment UI update logic) |
+| [ ] | Task 3: Final Verification and Cleanup |

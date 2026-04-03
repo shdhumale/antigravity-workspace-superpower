@@ -265,3 +265,5 @@ frontend/.angular/cache/16.2.16/babel-webpack/fd417d7dce812bede55a9761b545fca987
 frontend/.angular/cache/16.2.16/babel-webpack/fd2142c3dad65b54576029d59018be3baf1dd3a0c582b09c071a664b22b5fdd0.json
 frontend/.angular/cache/16.2.16/babel-webpack/fdd2f80235fa229f3eff97148a9dcbb748ac7c2516410c394ef721c658cb7da0.json
 frontend/.angular/cache/16.2.16/babel-webpack/fde4413aa3826a588944d6509d9ce67da8d3f97cb62a4b6c1bbf0df4217a61a7.json
+dist
+.angular

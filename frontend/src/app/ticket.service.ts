@@ -28,4 +28,8 @@ export class TicketService {
   searchTickets(query: string): Observable<Ticket[]> {
     return this.http.get<Ticket[]>(`${this.apiUrl}/search?query=${query}`);
   }
+
+  updateTicket(id: number, ticket: Ticket): Observable<Ticket> {
+    return this.http.put<Ticket>(`${this.apiUrl}/${id}`, ticket);
+  }
 }

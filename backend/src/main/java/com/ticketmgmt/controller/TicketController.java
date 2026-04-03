@@ -35,4 +35,18 @@ public class TicketController {
     public List<TicketEntity> searchTickets(@RequestParam("query") String query) {
         return ticketRepository.findByNameContainingOrDescriptionContaining(query, query);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TicketEntity> updateTicket(@PathVariable Long id, @RequestBody TicketEntity ticketDetails) {
+        if (id == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return ticketRepository.findById(id).map(ticket -> {
+            ticket.setName(ticketDetails.getName());
+            ticket.setDescription(ticketDetails.getDescription());
+            ticket.setStatus(ticketDetails.getStatus());
+            TicketEntity updated = ticketRepository.save(ticket);
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }
